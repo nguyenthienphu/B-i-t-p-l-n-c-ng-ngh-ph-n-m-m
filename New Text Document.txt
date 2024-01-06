@@ -1,0 +1,75 @@
+pip freeze > requirements.txt
+pip install -r requirements.txt
+
+var banks = "sacombank";
+    var accounts = "123456";
+    var bank = document.getElementById("bank").value;
+    var account = document.getElementById("account").value;
+
+&& bank == banks && account == accounts
+
+class Airport(BaseModel):
+    name = Column(String(50), nullable=False, unique=True)
+
+flight_airport = db.Table('flight_airport',
+                          Column('flight_id', Integer, ForeignKey('flight.id'), primary_key=True),
+                          Column('airport_id', Integer, ForeignKey('airport.id'), primary_key=True))
+
+airport = relationship('Airport', secondary='flight_airport', lazy='subquery', backref=backref('flight', lazy=True))
+
+def get_airport_start():
+    return AirportStart.query.all()
+
+
+def get_airport_end():
+    return AirportEnd.query.all()
+
+ if airport_start_id:
+        flight = flight.filter(Flight.airport_start_id.__eq__(airport_start_id))
+
+    if airport_end_id:
+        flight = flight.filter(Flight.airport_end_id.__eq__(airport_end_id))
+
+<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Sân bay đi</a>
+                    <ul class="dropdown-menu">
+                        {% for s in start %}
+                        <li><a class="dropdown-item" href="/?airport_start_id={{s.id}}">Vé {{ s.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Sân bay đến</a>
+                    <ul class="dropdown-menu">
+                        {% for e in end %}
+                        <li><a class="dropdown-item" href="/?airport_end_id={{e.id}}">Vé {{ e.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+
+class AirportStart(BaseModel):
+    name = Column(String(50), nullable=False, unique=True)
+    flight = relationship('Flight', backref='airportstart', lazy=True)
+
+    def __str__(self):
+        return self.name
+
+
+class AirportEnd(BaseModel):
+    name = Column(String(50), nullable=False, unique=True)
+    flight = relationship('Flight', backref='airportend', lazy=True)
+
+    def __str__(self):
+        return self.name
+
+airport_start_id = Column(Integer, ForeignKey(AirportStart.id), nullable=False)
+    airport_end_id = Column(Integer, ForeignKey(AirportEnd.id), nullable=False)
+
+<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Loại vé</a>
+                    <ul class="dropdown-menu">
+                        {% for t in type %}
+                        <li><a class="dropdown-item" href="/?type_id={{t.id}}">Vé {{ t.ten_loai }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
